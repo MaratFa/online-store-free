@@ -1,0 +1,121 @@
+.a2p5_5_4-a {
+  background-color: var(--textPrimary);
+  border-radius: 8px;
+  bottom: 0;
+  display: none;
+  left: 0;
+  opacity: 0.1;
+  pointer-events: none;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+.a2p5_5_4-a0 {
+  background-color: var(--bgSecondary);
+  border-radius: 8px;
+  box-sizing: border-box;
+  color: var(--textPrimary);
+  cursor: pointer;
+  display: inline-flex;
+  height: 32px;
+  margin: 0;
+  position: relative;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  white-space: nowrap;
+}
+.a2p5_5_4-a0.a2p5_5_4-a1 {
+  border-radius: 99px;
+}
+.a2p5_5_4-a0.a2p5_5_4-a2 {
+  border-radius: 6px;
+  height: 24px;
+}
+.a2p5_5_4-a0.a2p5_5_4-a2.a2p5_5_4-a1 {
+  border-radius: 99px;
+}
+.a2p5_5_4-a0:hover .a2p5_5_4-a {
+  display: inline;
+  display: initial;
+}
+.a2p5_5_4-a3 {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+  padding: 6px 8px;
+}
+.a2p5_5_4-a3.a2p5_5_4-a4 {
+  padding: 6px 0 6px 8px;
+}
+.a2p5_5_4-a3.a2p5_5_4-a2 {
+  padding: 2px 4px;
+}
+.a2p5_5_4-a3.a2p5_5_4-a2.a2p5_5_4-a4 {
+  padding: 2px 0 2px 4px;
+}
+.a2p5_5_4-a5 {
+  overflow: hidden;
+  padding: 0 4px;
+  text-overflow: ellipsis;
+}
+.a2p5_5_4-a6 {
+  margin: 0 2px;
+}
+.a2p5_5_4-a7 {
+  min-width: 16px;
+}
+.a2p5_5_4-a8 {
+  align-items: center;
+  display: flex;
+  padding-right: 8px;
+}
+.a2p5_5_4-a8.a2p5_5_4-a2 {
+  padding-right: 4px;
+}
+.a2p5_5_4-a7,
+.a2p5_5_4-a8 {
+  color: var(--graphicTertiary);
+}
+.a2p5_5_4-a9 {
+  background-color: var(--bgPremiumPrimaryInverted);
+  color: var(--textPrimaryInverted);
+}
+.a2p5_5_4-a9 .a2p5_5_4-a7,
+.a2p5_5_4-a9 .a2p5_5_4-a8 {
+  color: var(--graphicSecondaryInverted);
+}
+.a2p5_5_4-b.a2p5_5_4-b0 {
+  margin-right: 4px;
+}
+.a2p5_5_4-b1 {
+  background-color: var(--bgSecondary);
+  color: var(--textPrimary);
+}
+.a2p5_5_4-b1 .a2p5_5_4-a5 {
+  opacity: 0.4;
+}
+.a2p5_5_4-b1 .a2p5_5_4-a7,
+.a2p5_5_4-b1 .a2p5_5_4-a8 {
+  color: var(--graphicTertiary);
+  opacity: 0.4;
+}
+.a2p5_5_4-b2 {
+  align-items: center;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+.a2p5_5_4-b1,
+.a2p5_5_4-b3 {
+  cursor: default;
+}
+.a2p5_5_4-b4 {
+  visibility: hidden;
+}

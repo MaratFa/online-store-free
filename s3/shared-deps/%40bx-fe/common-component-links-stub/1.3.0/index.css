@@ -1,0 +1,18 @@
+.q4b1_3_0-a {
+  transition: var(--transition);
+  transition-property: color;
+}
+.q4b1_3_0-a0 {
+  color: #070707;
+}
+.q4b1_3_0-a0[href]:hover {
+  color: #0050e0;
+  cursor: pointer;
+}
+.q4b1_3_0-a1 {
+  color: #fff;
+  cursor: pointer;
+}
+.q4b1_3_0-a1[href]:hover {
+  color: #99a3ae;
+}

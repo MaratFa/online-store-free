@@ -1,0 +1,60 @@
+.ga5_3_7-a {
+  -webkit-touch-callout: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  align-items: center;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background: transparent;
+  border: none;
+  box-sizing: border-box;
+  color: var(--textAction);
+  cursor: pointer;
+  display: inline-flex;
+  font-family: var(--mainFont);
+  font-size: inherit;
+  font-weight: inherit;
+  margin: 0;
+  overflow: hidden;
+  padding: 0;
+  position: relative;
+  text-decoration: none;
+  transition: transform 0.1s cubic-bezier(0.55, 0, 1, 0.45);
+  white-space: nowrap;
+}
+.ga5_3_7-a0 {
+  color: var(--graphicActionPrimary);
+  flex-shrink: 0;
+}
+.ga5_3_7-a1 {
+  margin-right: 8px;
+}
+.ga5_3_7-a2 {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.ga5_3_7-a3 {
+  color: var(--textPrimary);
+  cursor: default;
+}
+.ga5_3_7-a3 .ga5_3_7-a2 {
+  opacity: 0.4;
+}
+.ga5_3_7-a3 .ga5_3_7-a0 {
+  color: var(--graphicTertiary);
+  opacity: 0.4;
+}
+.ga5_3_7-a4 {
+  opacity: 0.4;
+}
+.ga5_3_7-a3,
+.ga5_3_7-a4 {
+  cursor: default;
+}
+@media (hover: hover) {
+  .ga5_3_7-a:not(.ga5_3_7-a5):hover {
+    color: var(--textAction);
+    opacity: 0.9;
+  }
+}
