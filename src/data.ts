@@ -1,12 +1,25 @@
 // Product data for the Free Online Store Template
-const products = [
+export interface Product {
+  id: number;
+  name: string;
+  description: string;
+  price: number;
+  discountPrice?: number;
+  image: string;
+  category: string;
+  stock: number;
+  rating: number;
+  reviews: number;
+}
+
+export const products: Product[] = [
   {
     id: 1,
     name: "Premium Wireless Headphones",
     description: "High-quality wireless headphones with noise cancellation and superior sound quality. Perfect for music lovers and professionals.",
     price: 199.99,
     discountPrice: 149.99,
-    image: "images/headphones.jpg",
+    image: "/images/headphones.jpg",
     category: "Electronics",
     stock: 15,
     rating: 4.5,
@@ -18,7 +31,7 @@ const products = [
     description: "Stylish and durable leather laptop bag designed for professionals. Fits laptops up to 15 inches with additional compartments.",
     price: 89.99,
     discountPrice: 69.99,
-    image: "images/laptop-bag.jpg",
+    image: "/images/laptop-bag.jpg",
     category: "Accessories",
     stock: 25,
     rating: 4.3,
@@ -30,7 +43,7 @@ const products = [
     description: "Advanced smartwatch with health monitoring, GPS tracking, and smartphone integration. Water-resistant design with long battery life.",
     price: 249.99,
     discountPrice: 199.99,
-    image: "images/smartwatch.jpg",
+    image: "/images/smartwatch.jpg",
     category: "Electronics",
     stock: 12,
     rating: 4.7,
@@ -42,7 +55,7 @@ const products = [
     description: "Comfortable and sustainable organic cotton t-shirt available in multiple colors. Ethically produced with fair trade certification.",
     price: 29.99,
     discountPrice: 24.99,
-    image: "images/tshirt.jpg",
+    image: "/images/tshirt.jpg",
     category: "Clothing",
     stock: 50,
     rating: 4.2,
@@ -54,7 +67,7 @@ const products = [
     description: "Eco-friendly insulated water bottle that keeps drinks cold for 24 hours or hot for 12 hours. BPA-free with lifetime warranty.",
     price: 34.99,
     discountPrice: 29.99,
-    image: "images/water-bottle.jpg",
+    image: "/images/water-bottle.jpg",
     category: "Accessories",
     stock: 100,
     rating: 4.6,
@@ -66,7 +79,7 @@ const products = [
     description: "Non-slip, eco-friendly yoga mat with extra cushioning for joint support. Includes carrying strap and alignment markers.",
     price: 49.99,
     discountPrice: 39.99,
-    image: "images/yoga-mat.jpg",
+    image: "/images/yoga-mat.jpg",
     category: "Fitness",
     stock: 30,
     rating: 4.4,
@@ -78,7 +91,7 @@ const products = [
     description: "Adjustable height desk converter that transforms any regular desk into a standing desk. Spacious work surface with smooth transition.",
     price: 299.99,
     discountPrice: 249.99,
-    image: "images/standing-desk.jpg",
+    image: "/images/standing-desk.jpg",
     category: "Furniture",
     stock: 8,
     rating: 4.5,
@@ -90,7 +103,7 @@ const products = [
     description: "Comfortable office chair with lumbar support, adjustable armrests, and breathable mesh back. Designed for all-day comfort.",
     price: 399.99,
     discountPrice: 349.99,
-    image: "images/office-chair.jpg",
+    image: "/images/office-chair.jpg",
     category: "Furniture",
     stock: 5,
     rating: 4.6,
@@ -102,7 +115,7 @@ const products = [
     description: "Classic denim jacket with modern fit and sustainable production. Features multiple pockets and adjustable waist.",
     price: 79.99,
     discountPrice: 64.99,
-    image: "images/denim-jacket.jpg",
+    image: "/images/denim-jacket.jpg",
     category: "Clothing",
     stock: 20,
     rating: 4.3,
@@ -114,7 +127,7 @@ const products = [
     description: "Professional camera lens kit with multiple focal lengths. Compatible with most DSLR and mirrorless cameras.",
     price: 599.99,
     discountPrice: 499.99,
-    image: "images/camera-lens.jpg",
+    image: "/images/camera-lens.jpg",
     category: "Electronics",
     stock: 3,
     rating: 4.8,
@@ -126,7 +139,7 @@ const products = [
     description: "UV-protective polarized sunglasses with lightweight frame and scratch-resistant lenses. Includes protective case.",
     price: 59.99,
     discountPrice: 49.99,
-    image: "images/sunglasses.jpg",
+    image: "/images/sunglasses.jpg",
     category: "Accessories",
     stock: 40,
     rating: 4.4,
@@ -138,7 +151,7 @@ const products = [
     description: "Programmable coffee maker with thermal carafe, adjustable strength settings, and automatic shut-off. Makes up to 12 cups.",
     price: 129.99,
     discountPrice: 99.99,
-    image: "images/coffee-maker.jpg",
+    image: "/images/coffee-maker.jpg",
     category: "Home",
     stock: 15,
     rating: 4.5,
@@ -150,7 +163,7 @@ const products = [
     description: "Fast-charging wall adapter with multiple USB ports and universal compatibility. Includes safety features and compact design.",
     price: 29.99,
     discountPrice: 19.99,
-    image: "images/charger.jpg",
+    image: "/images/charger.jpg",
     category: "Electronics",
     stock: 75,
     rating: 4.2,
@@ -162,7 +175,7 @@ const products = [
     description: "Central control hub for all your smart home devices. Compatible with major brands and voice assistants.",
     price: 149.99,
     discountPrice: 119.99,
-    image: "images/smart-hub.jpg",
+    image: "/images/smart-hub.jpg",
     category: "Electronics",
     stock: 10,
     rating: 4.3,
@@ -174,7 +187,7 @@ const products = [
     description: "Durable backpack with laptop compartment, water bottle holder, and multiple organizational pockets. Comfortable padded straps.",
     price: 79.99,
     discountPrice: 64.99,
-    image: "images/backpack.jpg",
+    image: "/images/backpack.jpg",
     category: "Accessories",
     stock: 25,
     rating: 4.5,
@@ -183,7 +196,7 @@ const products = [
 ];
 
 // Categories
-const categories = [
+export const categories = [
   "All",
   "Electronics",
   "Clothing",

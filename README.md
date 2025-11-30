@@ -1,130 +1,138 @@
-# Online Store Template
+# Online Store - React Application
 
-A modern, responsive e-commerce template built with HTML, CSS, and JavaScript. This template provides a complete foundation for creating an online store with all essential features.
+A modern, responsive online store built with React, TypeScript, and CSS.
 
 ## Features
 
-- 📱 Fully responsive design
-- 🛍️ Product catalog with categories
-- 🔍 Advanced search and filtering
-- 🛒 Shopping cart functionality
-- 👤 User account management
-- 🎨 Modern UI with animations
-- 📊 Product ratings and reviews
-- 💳 Secure checkout process
-- 📦 Order tracking system
-- 📧 Email notifications
-- 🔍 SEO optimized
+- Product catalog with filtering and search functionality
+- Responsive design that works on all devices
+- Product categories for easy navigation
+- Product ratings and reviews
+- Discount pricing display
+- Modern UI with hover effects and transitions
 
-## Tech Stack
+## Technologies Used
 
-- HTML5
-- CSS3 (with modern features)
-- Vanilla JavaScript
-- Responsive Grid Layout
-- Local Storage for cart
-- Schema.org markup
+- React 18
+- TypeScript
+- CSS3 with custom properties
+- Font Awesome for icons
 
 ## Project Structure
 
 ```
-online-store/
-├── css/
-│   ├── style.css          # Main styles
-│   └── home.css           # Homepage specific styles
-├── js/
-│   ├── app.js             # Core functionality
-│   └── products.js        # Product management
-├── images/
-│   ├── products/          # Product images
-│   └── ui/               # UI elements
-├── pages/
-│   ├── products.html      # Product listing
-│   └── checkout.html      # Checkout process
-├── index.html             # Homepage
-└── README.md             # Documentation
+online-store-free/
+├── public/                 # Static assets
+│   ├── images/            # Product images
+│   └── index.html         # Main HTML file
+├── src/                   # Source code
+│   ├── components/        # Reusable components
+│   │   ├── Header.tsx
+│   │   └── Header.css
+│   ├── data.ts            # Product data
+│   ├── pages/             # Page components
+│   │   ├── Account.tsx
+│   │   ├── Home.tsx
+│   │   └── Products.tsx
+│   ├── App.tsx            # Main app component
+│   ├── App.css            # App styles
+│   ├── index.tsx          # Entry point
+│   └── index.css          # Global styles
+├── package.json           # Dependencies and scripts
+└── tsconfig.json          # TypeScript configuration
 ```
 
-## Quick Start
+## Getting Started
 
-1. Clone the repository
-```bash
-git clone https://github.com/yourusername/online-store.git
-```
+### Prerequisites
 
-2. Navigate to the project directory
-```bash
-cd online-store
-```
+- Node.js (v14 or higher)
+- npm or yarn
 
-3. Open `index.html` in your browser
+### Installation
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/your-username/online-store-free.git
+   cd online-store-free
+   ```
+
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+3. Start the development server:
+   ```bash
+   npm start
+   ```
+
+4. Open [http://localhost:3000](http://localhost:3000) to view the application in your browser.
+
+## Usage
+
+### Browsing Products
+
+- Navigate to the Products page to view all available items
+- Use the search bar to find specific products
+- Filter products by category using the category buttons
+- Sort products by price or featured status
+
+### Product Information
+
+Each product card displays:
+- Product image
+- Product name
+- Category
+- Rating and number of reviews
+- Original price (if discounted)
+- Discounted price (if applicable)
+- "Add to Cart" button
 
 ## Customization
 
-### Products
+### Adding New Products
 
-Add products in `js/products.js`:
-```javascript
-{
-  id: "unique-id",
-  name: "Product Name",
-  price: 99.99,
-  image: "path/to/image.jpg",
-  category: "Category",
-  description: "Product description",
-  stock: 10,
-  rating: 4.5
-}
-```
+To add new products:
 
-### Styling
+1. Open `src/data.ts`
+2. Add a new product object to the `products` array with the following structure:
+   ```typescript
+   {
+     id: number,              // Unique identifier
+     name: string,            // Product name
+     description: string,     // Product description
+     price: number,           // Regular price
+     discountPrice?: number,  // Optional discounted price
+     image: string,           // Image path
+     category: string,        // Product category
+     stock: number,           // Available stock
+     rating: number,          // Average rating (1-5)
+     reviews: number          // Number of reviews
+   }
+   ```
 
-Customize colors in `css/style.css`:
-```css
-:root {
-  --primary-color: #4a6de5;
-  --secondary-color: #f8f9fa;
-  --text-color: #333;
-}
-```
+3. Add the product image to the `public/images` directory
 
-## SEO Features
+### Adding New Categories
 
-- Meta tags optimization
-- Structured data markup
-- XML sitemap
-- Robots.txt
-- Canonical URLs
-- Open Graph tags
-- Twitter Cards
+To add new product categories:
 
-## Browser Support
-
-- Chrome 60+
-- Firefox 55+
-- Safari 12+
-- Edge 79+
-
-## Performance
-
-- Lazy loading images
-- Minified CSS/JS
-- Optimized images
-- CDN ready
-- PWA features
-
-## License
-
-MIT License - feel free to use for personal or commercial projects.
+1. Open `src/data.ts`
+2. Add the new category to the `categories` array:
+   ```typescript
+   export const categories = [
+     "All",
+     "Electronics",
+     "Clothing",
+     // Add your new category here
+   ];
+   ```
 
 ## Contributing
 
-1. Fork the repository
-2. Create your feature branch
-3. Commit your changes
-4. Push to the branch
-5. Open a pull request
+Contributions are welcome! Please feel free to submit a Pull Request.
 
-## Support
+## License
 
-For support, please open an issue in the GitHub repository or contact us.
+This project is licensed under the MIT License.
