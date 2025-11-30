@@ -184,7 +184,7 @@ function renderAccountDashboard() {
       <div class="account-sidebar">
         <div class="user-profile">
           <div class="user-avatar">
-            <img src="../images/avatar.jpg" alt="${userName}">
+            <img src="../images/avatar.png" alt="${userName}">
           </div>
           <h3>${userName}</h3>
           <p>${userEmail}</p>

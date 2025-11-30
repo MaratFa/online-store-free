@@ -15,6 +15,10 @@ document.addEventListener('DOMContentLoaded', function() {
 function initProductsPage() {
   productsContainer = document.querySelector('.products-container');
 
+  // Initialize enhanced filters
+  initializeEnhancedFilters();
+}
+
   // Create filter controls if they don't exist
   if (!document.querySelector('.products-header')) {
     const header = document.querySelector('.products-header');
@@ -242,4 +246,120 @@ function debounce(func, wait) {
     clearTimeout(timeout);
     timeout = setTimeout(() => func.apply(context, args), wait);
   };
+}
+
+// Enhanced filter functions
+function initializeEnhancedFilters() {
+  const filterToggle = document.getElementById('filter-toggle');
+  const filterPanel = document.getElementById('filter-panel');
+  const closeFilters = document.getElementById('close-filters');
+  const applyFilters = document.querySelector('.apply-filters');
+  const filterCount = document.getElementById('filter-count');
+
+  // Toggle filter panel
+  filterToggle.addEventListener('click', () => {
+    filterPanel.classList.toggle('active');
+  });
+
+  closeFilters.addEventListener('click', () => {
+    filterPanel.classList.remove('active');
+  });
+
+  // Apply filters
+  applyFilters.addEventListener('click', () => {
+    applyProductFilters();
+    filterPanel.classList.remove('active');
+    updateFilterCount();
+  });
+
+  // Category filters
+  document.querySelectorAll('.category-filters input').forEach(checkbox => {
+    checkbox.addEventListener('change', () => {
+      updateFilterCount();
+    });
+  });
+
+  // Price range
+  const minPrice = document.getElementById('min-price');
+  const maxPrice = document.getElementById('max-price');
+  const priceSlider = document.getElementById('price-slider');
+
+  minPrice.addEventListener('input', updatePriceSlider);
+  maxPrice.addEventListener('input', updatePriceSlider);
+  priceSlider.addEventListener('input', updatePriceInputs);
+
+  function updatePriceSlider() {
+    const min = parseInt(minPrice.value) || 0;
+    const max = parseInt(maxPrice.value) || 600;
+    priceSlider.value = max;
+  }
+
+  function updatePriceInputs() {
+    maxPrice.value = priceSlider.value;
+  }
+
+  // Rating filters
+  document.querySelectorAll('.rating-filters input').forEach(radio => {
+    radio.addEventListener('change', () => {
+      updateFilterCount();
+    });
+  });
+
+  // Sort dropdown
+  const sortBtn = document.getElementById('sort-btn');
+  const sortOptions = document.getElementById('sort-options');
+
+  sortBtn.addEventListener('click', () => {
+    sortOptions.classList.toggle('show');
+  });
+
+  document.querySelectorAll('.sort-option').forEach(option => {
+    option.addEventListener('click', () => {
+      document.querySelector('.sort-option.active').classList.remove('active');
+      option.classList.add('active');
+      sortProducts(option.dataset.sort);
+      sortOptions.classList.remove('show');
+    });
+  });
+
+  // View options
+  document.querySelectorAll('.view-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelector('.view-btn.active').classList.remove('active');
+      btn.classList.add('active');
+      toggleView(btn.dataset.view);
+    });
+  });
+}
+
+function applyProductFilters() {
+  const selectedCategories = Array.from(document.querySelectorAll('.category-filters input:checked'))
+    .map(cb => cb.value);
+  const minPrice = parseInt(document.getElementById('min-price').value) || 0;
+  const maxPrice = parseInt(document.getElementById('max-price').value) || Infinity;
+  const selectedRating = document.querySelector('.rating-filters input:checked').value;
+
+  filteredProducts = products.filter(product => {
+    const categoryMatch = selectedCategories.includes(product.category.toLowerCase());
+    const priceMatch = product.price >= minPrice && product.price <= maxPrice;
+    const ratingMatch = selectedRating === 'all' || product.rating >= parseInt(selectedRating);
+
+    return categoryMatch && priceMatch && ratingMatch;
+  });
+
+  displayProducts();
+}
+
+function updateFilterCount() {
+  const activeFilters = document.querySelectorAll('.category-filters input:checked').length +
+    (document.getElementById('min-price').value || document.getElementById('max-price').value ? 1 : 0) +
+    (document.querySelector('.rating-filters input:checked').value !== 'all' ? 1 : 0);
+
+  document.getElementById('filter-count').textContent = activeFilters;
+}
+
+function toggleView(view) {
+  const container = document.getElementById('products-container');
+  container.className = view === 'list' ? 'products-list' : 'products-grid';
+  displayProducts();
 }
