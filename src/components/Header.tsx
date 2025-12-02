@@ -1,8 +1,22 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import './Header.css';
 
 export const Header: React.FC = () => {
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    // Check if user is logged in
+    const userEmail = localStorage.getItem('userEmail');
+    setIsLoggedIn(userEmail !== null);
+  }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem('userEmail');
+    setIsLoggedIn(false);
+    navigate('/');
+  };
   return (
     <header className="header">
       <div className="container">
@@ -14,7 +28,14 @@ export const Header: React.FC = () => {
             <ul>
               <li><Link to="/">Home</Link></li>
               <li><Link to="/products">Products</Link></li>
-              <li><Link to="/account">Account</Link></li>
+              {isLoggedIn ? (
+                <>
+                  <li><Link to="/dashboard">Dashboard</Link></li>
+                  <li><button onClick={handleLogout} className="logout-btn">Logout</button></li>
+                </>
+              ) : (
+                <li><Link to="/account">Account</Link></li>
+              )}
             </ul>
           </nav>
           <div className="header-actions">
