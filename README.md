@@ -1,29 +1,30 @@
 # Online Store - React Application
 
-A modern, responsive online store built with React, TypeScript, and CSS. This e-commerce platform features a clean design, intuitive user interface, and comprehensive shopping functionality.
+A modern, responsive e-commerce platform built with React, TypeScript, and CSS. This application showcases a clean design with intuitive user interface and comprehensive shopping functionality.
 
-## Features
+## ✨ Features
 
-- **Product Catalog**: Browse products with filtering, sorting, and search functionality
-- **Shopping Cart**: Add items to cart, adjust quantities, and view order summary
-- **User Authentication**: Register and login to access personalized features
-- **Responsive Design**: Fully responsive layout that works on all devices
-- **Product Categories**: Easy navigation through organized product categories
-- **Product Details**: Detailed product pages with ratings, reviews, and specifications
-- **Discount Pricing**: Clear display of original and discounted prices
-- **Modern UI**: Beautiful interface with smooth transitions and hover effects
-- **Component Architecture**: Well-organized, reusable components
+- 🛍️ **Product Catalog**: Browse products with filtering, sorting, and search functionality
+- 🛒 **Shopping Cart**: Add items to cart, adjust quantities, and view order summary with Redux state management
+- 🔐 **User Authentication**: Register and login to access personalized features
+- 📱 **Responsive Design**: Fully responsive layout that works on all devices
+- 🏷️ **Product Categories**: Easy navigation through organized product categories
+- 📋 **Product Details**: Detailed product pages with ratings, reviews, and specifications
+- 💰 **Discount Pricing**: Clear display of original and discounted prices
+- 🎨 **Modern UI**: Beautiful interface with smooth transitions and hover effects
+- 🧩 **Component Architecture**: Well-organized, reusable UI components
 
-## Technologies Used
+## 🛠️ Technologies Used
 
 - React 18 with functional components and hooks
 - TypeScript for type safety
 - React Router for client-side routing
+- Redux Toolkit for state management
 - CSS3 with custom properties for styling
 - Font Awesome for icons
 - Express.js for production server
 
-## Project Structure
+## 📁 Project Structure
 
 ```
 online-store-free/
@@ -42,6 +43,9 @@ online-store-free/
 │   │   ├── Cart.tsx       # Shopping cart page
 │   │   ├── Account.tsx    # Account login/registration
 │   │   └── Dashboard.tsx  # User dashboard
+│   ├── store/             # Redux store configuration
+│   │   ├── cartSlice.ts   # Cart state management
+│   │   └── store.ts       # Redux store setup
 │   ├── data.ts            # Product data
 │   ├── App.tsx            # Main app component with routing
 │   ├── App.css            # App styles
@@ -52,7 +56,7 @@ online-store-free/
 └── tsconfig.json          # TypeScript configuration
 ```
 
-## Getting Started
+## 🚀 Getting Started
 
 ### Prerequisites
 
@@ -95,7 +99,7 @@ npm run serve
 
 This will start the production server on port 3000 (or the port specified in the PORT environment variable).
 
-## Usage
+## 📖 Usage
 
 ### Browsing Products
 
@@ -139,7 +143,7 @@ The application follows a modular component structure:
 
 All components are organized in their respective directories with index files for clean imports.
 
-## Customization
+## 🎨 Customization
 
 ### Adding New Products
 
@@ -222,7 +226,7 @@ To add new pages:
 2. Add a route in `App.tsx`
 3. Add navigation links in `Header.tsx` if needed
 
-## Contributing
+## 🤝 Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request.
 
@@ -241,11 +245,11 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 - Use proper TypeScript typing for all props and state
 - Follow the established directory structure
 
-## License
+## 📄 License
 
 This project is licensed under the MIT License.
 
-## Future Enhancements
+## 🔮 Future Enhancements
 
 Potential improvements for future versions:
 
