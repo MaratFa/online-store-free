@@ -11,9 +11,151 @@ import {
 import { addToCart } from '../store/slices/cartSlice';
 import { Product } from '../data';
 import { fetchProducts } from '../store/thunks';
+import { RatingStars } from '../components/ui/RatingStars';
+import { ProductPrice } from '../components/ui/ProductPrice';
 import './Products.css';
 
-export const Products: React.FC = () => {
+// Component for pagination
+const Pagination: React.FC<{
+  currentPage: number;
+  totalPages: number;
+  onPageChange: (page: number) => void;
+}> = ({ currentPage, totalPages, onPageChange }) => {
+  if (totalPages <= 1) return null;
+
+  return (
+    <div className="pagination">
+      <button
+        className="pagination-btn"
+        disabled={currentPage === 1}
+        onClick={() => onPageChange(currentPage - 1)}
+      >
+        <i className="fas fa-chevron-left"></i>
+      </button>
+
+      {[...Array(totalPages)].map((_, i) => (
+        <button
+          key={i + 1}
+          className={`pagination-btn ${currentPage === i + 1 ? 'active' : ''}`}
+          onClick={() => onPageChange(i + 1)}
+        >
+          {i + 1}
+        </button>
+      ))}
+
+      <button
+        className="pagination-btn"
+        disabled={currentPage === totalPages}
+        onClick={() => onPageChange(currentPage + 1)}
+      >
+        <i className="fas fa-chevron-right"></i>
+      </button>
+    </div>
+  );
+};
+
+// Component for quick view modal
+const QuickViewModal: React.FC<{
+  product: Product | null;
+  onClose: () => void;
+}> = ({ product, onClose }) => {
+  const dispatch = useAppDispatch();
+
+  if (!product) return null;
+
+  const handleAddToCart = () => {
+    dispatch(addToCart(product));
+    onClose();
+  };
+
+  return (
+    <div className="quick-view-modal" onClick={onClose}>
+      <div className="quick-view-content" onClick={(e) => e.stopPropagation()}>
+        <button className="close-btn" onClick={onClose}>
+          <i className="fas fa-times"></i>
+        </button>
+        <div className="quick-view-image">
+          <img src={product.image} alt={product.name} />
+        </div>
+        <div className="quick-view-details">
+          <h3>{product.name}</h3>
+          <RatingStars rating={product.rating} reviews={product.reviews} />
+          <ProductPrice product={product} />
+          <div className="product-description">
+            {product.description}
+          </div>
+          <div className="quick-view-actions">
+            <Link to={`/product/${product.id}`} className="view-details-btn">
+              View Details
+            </Link>
+            <button className="add-to-cart-btn" onClick={handleAddToCart}>
+              Add to Cart
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+// Component for product card
+const ProductCard: React.FC<{
+  product: Product;
+  onQuickView: (product: Product) => void;
+  onAddToCompare: (id: number) => void;
+  isInCompareList: boolean;
+}> = ({ product, onQuickView, onAddToCompare, isInCompareList }) => {
+  const dispatch = useAppDispatch();
+
+  const handleAddToCart = () => {
+    console.log('Adding to cart:', product);
+    dispatch(addToCart(product));
+  };
+
+  const discountPercentage = product.discountPrice 
+    ? Math.round((1 - product.discountPrice / product.price) * 100)
+    : 0;
+
+  return (
+    <div className="product-card">
+      <div className="product-actions">
+        <button
+          className={`compare-checkbox ${isInCompareList ? 'active' : ''}`}
+          onClick={() => onAddToCompare(product.id)}
+          title="Add to compare"
+        >
+          <i className="fas fa-balance-scale"></i>
+        </button>
+        <button
+          className="quick-view-btn"
+          onClick={() => onQuickView(product)}
+          title="Quick view"
+        >
+          <i className="fas fa-eye"></i>
+        </button>
+      </div>
+      <Link to={`/product/${product.id}`} className="product-link">
+        <div className="product-image">
+          <img src={product.image} alt={product.name} />
+          {product.discountPrice && (
+            <div className="discount-badge">-{discountPercentage}%</div>
+          )}
+        </div>
+        <div className="product-info">
+          <div className="product-category">{product.category}</div>
+          <h3 className="product-title">{product.name}</h3>
+          <RatingStars rating={product.rating} reviews={product.reviews} />
+          <ProductPrice product={product} />
+        </div>
+      </Link>
+      <button className="add-to-cart-btn" onClick={handleAddToCart}>
+        Add to Cart
+      </button>
+    </div>
+  );
+};
+
+export const ProductsRefactored: React.FC = () => {
   const dispatch = useAppDispatch();
   const {
     filteredProducts,
@@ -239,94 +381,22 @@ export const Products: React.FC = () => {
         {/* Products Grid */}
         <div className="products-grid">
           {filteredAndSortedProducts.map(product => (
-            <div key={product.id} className="product-card">
-              <div className="product-actions">
-                <button
-                  className={`compare-checkbox ${compareList.includes(product.id) ? 'active' : ''}`}
-                  onClick={() => handleAddToCompare(product.id)}
-                  title="Add to compare"
-                >
-                  <i className="fas fa-balance-scale"></i>
-                </button>
-                <button
-                  className="quick-view-btn"
-                  onClick={() => handleQuickView(product)}
-                  title="Quick view"
-                >
-                  <i className="fas fa-eye"></i>
-                </button>
-              </div>
-              <Link to={`/product/${product.id}`} className="product-link">
-                <div className="product-image">
-                  <img src={product.image} alt={product.name} />
-                  {product.discountPrice && (
-                    <div className="discount-badge">
-                      -{Math.round((1 - product.discountPrice / product.price) * 100)}%
-                    </div>
-                  )}
-                </div>
-                <div className="product-info">
-                  <div className="product-category">{product.category}</div>
-                  <h3 className="product-title">{product.name}</h3>
-                  <div className="product-rating">
-                    <div className="stars">
-                      {[...Array(Math.floor(product.rating))].map((_, i) => (
-                        <i key={i} className="fas fa-star"></i>
-                      ))}
-                      {product.rating % 1 !== 0 && <i className="fas fa-star-half-alt"></i>}
-                    </div>
-                    <span className="rating-value">({product.reviews})</span>
-                  </div>
-                  <div className="product-price">
-                    {product.discountPrice ? (
-                      <>
-                        <span className="original-price">${product.price}</span>
-                        <span className="current-price">${product.discountPrice}</span>
-                      </>
-                    ) : (
-                      <span className="current-price">${product.price}</span>
-                    )}
-                  </div>
-                </div>
-              </Link>
-              <button className="add-to-cart-btn" onClick={() => {
-                console.log('Adding to cart:', product);
-                dispatch(addToCart(product));
-              }}>Add to Cart</button>
-            </div>
+            <ProductCard
+              key={product.id}
+              product={product}
+              onQuickView={handleQuickView}
+              onAddToCompare={handleAddToCompare}
+              isInCompareList={compareList.includes(product.id)}
+            />
           ))}
         </div>
 
         {/* Pagination */}
-        {totalPages > 1 && (
-          <div className="pagination">
-            <button
-              className="pagination-btn"
-              disabled={currentPage === 1}
-              onClick={() => handlePageChange(currentPage - 1)}
-            >
-              <i className="fas fa-chevron-left"></i>
-            </button>
-
-            {[...Array(totalPages)].map((_, i) => (
-              <button
-                key={i + 1}
-                className={`pagination-btn ${currentPage === i + 1 ? 'active' : ''}`}
-                onClick={() => handlePageChange(i + 1)}
-              >
-                {i + 1}
-              </button>
-            ))}
-
-            <button
-              className="pagination-btn"
-              disabled={currentPage === totalPages}
-              onClick={() => handlePageChange(currentPage + 1)}
-            >
-              <i className="fas fa-chevron-right"></i>
-            </button>
-          </div>
-        )}
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPageChange={handlePageChange}
+        />
 
         {/* Recently Viewed Products */}
         {recentlyViewed.length > 0 && (
@@ -339,13 +409,7 @@ export const Products: React.FC = () => {
                     <img src={product.image} alt={product.name} />
                     <div className="product-info">
                       <h4>{product.name}</h4>
-                      <div className="product-price">
-                        {product.discountPrice ? (
-                          <span className="current-price">${product.discountPrice}</span>
-                        ) : (
-                          <span className="current-price">${product.price}</span>
-                        )}
-                      </div>
+                      <ProductPrice product={product} />
                     </div>
                   </Link>
                 </div>
@@ -356,57 +420,10 @@ export const Products: React.FC = () => {
       </div>
 
       {/* Quick View Modal */}
-      {quickViewProduct && (
-        <div className="quick-view-modal" onClick={() => setQuickViewProduct(null)}>
-          <div className="quick-view-content" onClick={(e) => e.stopPropagation()}>
-            <button className="close-btn" onClick={() => setQuickViewProduct(null)}>
-              <i className="fas fa-times"></i>
-            </button>
-            <div className="quick-view-image">
-              <img src={quickViewProduct.image} alt={quickViewProduct.name} />
-            </div>
-            <div className="quick-view-details">
-              <h3>{quickViewProduct.name}</h3>
-              <div className="product-rating">
-                <div className="stars">
-                  {[...Array(Math.floor(quickViewProduct.rating))].map((_, i) => (
-                    <i key={i} className="fas fa-star"></i>
-                  ))}
-                  {quickViewProduct.rating % 1 !== 0 && <i className="fas fa-star-half-alt"></i>}
-                </div>
-                <span className="rating-value">({quickViewProduct.reviews})</span>
-              </div>
-              <div className="product-price">
-                {quickViewProduct.discountPrice ? (
-                  <>
-                    <span className="original-price">${quickViewProduct.price}</span>
-                    <span className="current-price">${quickViewProduct.discountPrice}</span>
-                  </>
-                ) : (
-                  <span className="current-price">${quickViewProduct.price}</span>
-                )}
-              </div>
-              <div className="product-description">
-                {quickViewProduct.description}
-              </div>
-              <div className="quick-view-actions">
-                <Link to={`/product/${quickViewProduct.id}`} className="view-details-btn">
-                  View Details
-                </Link>
-                <button
-                  className="add-to-cart-btn"
-                  onClick={() => {
-                    dispatch(addToCart(quickViewProduct));
-                    setQuickViewProduct(null);
-                  }}
-                >
-                  Add to Cart
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
+      <QuickViewModal
+        product={quickViewProduct}
+        onClose={() => setQuickViewProduct(null)}
+      />
     </div>
   );
 };

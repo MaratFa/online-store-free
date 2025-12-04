@@ -7,6 +7,7 @@ import { ProductDetail } from './pages/ProductDetail';
 import { Account } from './pages/Account';
 import { Dashboard } from './pages/Dashboard';
 import { Cart } from './pages/Cart';
+import { Orders } from './pages/Orders';
 import { useAppDispatch, useAppSelector } from './store/hooks';
 import { fetchProducts } from './store/thunks';
 import { loginSuccess } from './store/slices/userSlice';
@@ -47,6 +48,11 @@ function App() {
             <Route path="/product/:id" element={<ProductDetail />} />
             <Route path="/cart" element={<Cart />} />
             <Route path="/account" element={<Account />} />
+            <Route path="/orders" element={
+              <ProtectedRoute>
+                <Orders />
+              </ProtectedRoute>
+            } />
             <Route path="/dashboard" element={
               <ProtectedRoute>
                 <Dashboard />

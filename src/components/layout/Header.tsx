@@ -33,6 +33,7 @@ export const Header: React.FC = () => {
               {isAuthenticated ? (
                 <>
                   <li><Link to="/dashboard">Dashboard</Link></li>
+                  <li><Link to="/orders">Orders</Link></li>
                   <li><button onClick={handleLogout} className="logout-btn">Logout</button></li>
                 </>
               ) : (

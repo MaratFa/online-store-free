@@ -7,9 +7,19 @@ export const fetchProducts = createAsyncThunk(
   'products/fetchProducts',
   async (_, { rejectWithValue }) => {
     try {
+      console.log('Thunk: Fetching products');
       const response = await productAPI.getAll();
+      console.log('Thunk: Received response', response);
+      
+      // Ensure we always return a valid array
+      if (!response.data) {
+        console.warn('Thunk: No data in response, returning empty array');
+        return [];
+      }
+      
       return response.data;
     } catch (error) {
+      console.error('Thunk: Error fetching products', error);
       return rejectWithValue((error as any).response?.data?.message || 'Failed to fetch products');
     }
   }

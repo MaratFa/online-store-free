@@ -97,6 +97,7 @@ const productsSlice = createSlice({
         state.error = null;
       })
       .addCase(fetchProducts.fulfilled, (state: any, action: any) => {
+        console.log('Slice: Received products', action.payload);
         state.loading = false;
         
         // Handle null payload
