@@ -98,20 +98,12 @@ const productsSlice = createSlice({
       })
       .addCase(fetchProducts.fulfilled, (state: any, action: any) => {
         state.loading = false;
-        
-        // Handle null payload
-        if (action.payload === null) {
-          state.products = [];
-          state.filteredProducts = [];
-          state.categories = ['All'];
-        } else {
-          state.products = action.payload;
-          state.filteredProducts = action.payload;
+        state.products = action.payload;
+        state.filteredProducts = action.payload;
 
-          // Extract unique categories
-          const uniqueCategories = Array.from(new Set(action.payload.map((product: any) => product.category)));
-          state.categories = ['All', ...uniqueCategories];
-        }
+        // Extract unique categories
+        const uniqueCategories = Array.from(new Set(action.payload.map((product: any) => product.category)));
+        state.categories = ['All', ...uniqueCategories];
       })
       .addCase(fetchProducts.rejected, (state: any, action: any) => {
         state.loading = false;

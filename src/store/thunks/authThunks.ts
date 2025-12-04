@@ -1,0 +1,84 @@
+
+import { createAsyncThunk } from '@reduxjs/toolkit';
+import { authAPI } from '../../services/apiWithFallback';
+
+// Type definitions
+interface AuthResponse {
+  token: string;
+  user: {
+    id: string;
+    email: string;
+    name: string;
+    avatar?: string;
+  };
+}
+
+// Async thunks for authentication
+export const loginUser = createAsyncThunk(
+  'auth/login',
+  async (credentials: { email: string; password: string }, { rejectWithValue }) => {
+    try {
+      const response = await authAPI.login(credentials);
+      // Cast response data to AuthResponse
+      const authData = response.data as AuthResponse;
+      // Store token in localStorage
+      localStorage.setItem('token', authData.token);
+      localStorage.setItem('userEmail', authData.user.email);
+      localStorage.setItem('userName', authData.user.name);
+      return authData;
+    } catch (error) {
+      return rejectWithValue((error as any).response?.data?.message || 'Login failed');
+    }
+  }
+);
+
+export const registerUser = createAsyncThunk(
+  'auth/register',
+  async (userData: { name: string; email: string; password: string }, { rejectWithValue }) => {
+    try {
+      const response = await authAPI.register(userData);
+      // Cast response data to AuthResponse
+      const authData = response.data as AuthResponse;
+      // Store token in localStorage
+      localStorage.setItem('token', authData.token);
+      localStorage.setItem('userEmail', authData.user.email);
+      localStorage.setItem('userName', authData.user.name);
+      return authData;
+    } catch (error) {
+      return rejectWithValue((error as any).response?.data?.message || 'Registration failed');
+    }
+  }
+);
+
+export const logoutUser = createAsyncThunk(
+  'auth/logout',
+  async (_, { rejectWithValue }) => {
+    try {
+      await authAPI.logout();
+      // Clear localStorage
+      localStorage.removeItem('token');
+      localStorage.removeItem('userEmail');
+      localStorage.removeItem('userName');
+      return true;
+    } catch (error) {
+      // Even if API call fails, clear local storage
+      localStorage.removeItem('token');
+      localStorage.removeItem('userEmail');
+      localStorage.removeItem('userName');
+      return rejectWithValue((error as any).response?.data?.message || 'Logout failed');
+    }
+  }
+);
+
+export const fetchCurrentUser = createAsyncThunk(
+  'auth/fetchCurrentUser',
+  async (_, { rejectWithValue }) => {
+    try {
+      const response = await authAPI.getCurrentUser();
+      // Cast response data to User type
+      return response.data as AuthResponse['user'];
+    } catch (error) {
+      return rejectWithValue((error as any).response?.data?.message || 'Failed to fetch user');
+    }
+  }
+);

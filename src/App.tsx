@@ -8,9 +8,9 @@ import { Account } from './pages/Account';
 import { Dashboard } from './pages/Dashboard';
 import { Cart } from './pages/Cart';
 import { useAppDispatch, useAppSelector } from './store/hooks';
-import { setProducts, setCategories } from './store/slices/productsSlice';
+import { fetchProducts } from './store/thunks';
 import { loginSuccess } from './store/slices/userSlice';
-import { products, categories } from './data';
+import { fetchCurrentUser } from './store/thunks';
 import './App.css';
 
 // Protected Route component
@@ -24,20 +24,15 @@ function App() {
   const { isAuthenticated } = useAppSelector(state => state.user);
   
   useEffect(() => {
-    // Load initial data
-    dispatch(setProducts(products));
-    dispatch(setCategories(categories));
+    // Load initial data from API
+    dispatch(fetchProducts());
     
     // Check for existing user session in localStorage
-    const userEmail = localStorage.getItem('userEmail');
-    const userName = localStorage.getItem('userName');
+    const token = localStorage.getItem('token');
+
     
-    if (userEmail && userName) {
-      dispatch(loginSuccess({
-        id: '1',
-        email: userEmail,
-        name: userName,
-      }));
+    if (token) {
+      dispatch(fetchCurrentUser());
     }
   }, [dispatch]);
   
