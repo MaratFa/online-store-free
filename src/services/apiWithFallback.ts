@@ -8,7 +8,7 @@ import axios, {
 import { config } from '../config';
 
 // Create axios instance
-const api = axios.create({
+export const api = axios.create({
   baseURL: config.api.baseUrl,
   timeout: config.api.timeout,
 });

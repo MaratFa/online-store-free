@@ -16,7 +16,7 @@ function App() {
   
   useEffect(() => {
     // Load initial data from API
-    dispatch(fetchProducts());
+    dispatch(fetchProducts({ filter: {}, page: 1 }));
     
     // Check for existing user session in localStorage
     const token = localStorage.getItem(STORAGE_KEYS.TOKEN);

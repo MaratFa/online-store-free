@@ -4,6 +4,7 @@ import { fetchCart, addToCart as addToCartApi, updateCartItem, removeFromCart as
 
 interface CartItem extends Product {
   quantity: number;
+  addedAt: string;
 }
 
 interface CartState {
@@ -35,6 +36,7 @@ const cartSlice = createSlice({
         state.items.push({
           ...action.payload,
           quantity: 1,
+          addedAt: new Date().toISOString(),
         });
       }
 

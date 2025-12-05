@@ -47,3 +47,5 @@ export interface CreateOrderRequest {
   };
   paymentMethod: string;
 }
+
+// PaginatedResponse is imported from api.ts

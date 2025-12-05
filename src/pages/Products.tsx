@@ -192,7 +192,7 @@ export const Products: React.FC = () => {
 
   // Fetch products on component mount
   useEffect(() => {
-    dispatch(fetchProducts());
+    dispatch(fetchProducts({ filter: {}, page: 1 }));
   }, [dispatch]);
 
   // Handle page change
@@ -263,7 +263,7 @@ export const Products: React.FC = () => {
           <div className="error-state">
             <i className="fas fa-exclamation-circle"></i>
             <p>Error: {error}</p>
-            <button onClick={() => dispatch(fetchProducts())} className="btn">
+            <button onClick={() => dispatch(fetchProducts({ filter: {}, page: 1 }))} className="btn">
               Try Again
             </button>
           </div>

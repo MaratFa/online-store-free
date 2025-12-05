@@ -4,7 +4,7 @@ import { productAPI } from "../../services/apiWithFallback";
 // Async thunks for product-related operations
 export const fetchProducts = createAsyncThunk(
   "products/fetchProducts",
-  async (_, { rejectWithValue }) => {
+  async ({ filter, page }: { filter?: any; page?: number }, { rejectWithValue }) => {
     try {
       const response = await productAPI.getAll();
 
@@ -26,9 +26,9 @@ export const fetchProducts = createAsyncThunk(
 
 export const fetchProductById = createAsyncThunk(
   "products/fetchProductById",
-  async (id: string, { rejectWithValue }) => {
+  async (id: number, { rejectWithValue }) => {
     try {
-      const response = await productAPI.getById(id);
+      const response = await productAPI.getById(id.toString());
       return response.data;
     } catch (error) {
       return rejectWithValue(
