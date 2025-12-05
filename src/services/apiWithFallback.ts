@@ -4,10 +4,13 @@ import axios, {
   InternalAxiosRequestConfig,
 } from "axios";
 
+// Import configuration
+import { config } from '../config';
+
 // Create axios instance
 const api = axios.create({
-  baseURL: process.env.REACT_APP_API_URL || "http://localhost:5000/api",
-  timeout: 10000,
+  baseURL: config.api.baseUrl,
+  timeout: config.api.timeout,
 });
 
 // Flag to determine if we should use mock API

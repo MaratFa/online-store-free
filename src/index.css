@@ -1,33 +1,7 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
+@import './styles/globals.css';
+@import './styles/variables.css';
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
-}
-
-:root {
-  --primary-color: #3498db;
-  --primary-color-dark: #2980b9;
-  --text-color: #2c3e50;
-  --light-text: #7f8c8d;
-  --background-color: #f8f9fa;
-  --card-shadow: 0 2px 8px rgba(0,0,0,0.1);
-  --transition: all 0.3s ease;
-}
-
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 1rem;
-}
-
+/* App-specific styles */
 main {
   min-height: calc(100vh - 70px);
   padding-top: 2rem;
