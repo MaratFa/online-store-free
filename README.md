@@ -139,7 +139,7 @@ Each product card displays:
 - View your cart by clicking the cart icon in the header
 - Adjust quantities using the + and - buttons
 - Remove items with the trash icon
-- View order summary with subtotal, tax, and total
+- View the order summary with subtotal, tax, and total
 - Proceed to checkout when ready
 
 ### User Account
@@ -165,7 +165,7 @@ The application includes a robust API fallback system that ensures smooth operat
 - **Automatic Detection**: The system automatically detects when the backend is not responding
 - **Seamless Transition**: Switches to mock data without user interruption
 - **Development Mode**: Uses mock data by default in development for faster development
-- **Type Safety**: All mock data is properly typed to match the real API responses
+- **Type Safety**: All mock data is properly typed to match real API responses
 - **Consistent Interface**: The same API interface is used regardless of whether real or mock data is being used
 
 ### How It Works
@@ -207,7 +207,7 @@ To add new products:
 To add new product categories:
 
 1. Open `src/data.ts`
-2. Add the new category to the `categories` array:
+2. Add a new category to the `categories` array:
    ```typescript
    export const categories = [
      "All",
@@ -221,7 +221,7 @@ To add new product categories:
 
 To add new components:
 
-1. Create the component file in the appropriate directory:
+1. Create a component file in the appropriate directory:
    - Layout components: `src/components/layout/`
    - UI components: `src/components/ui/`
    - Product components: `src/components/product/`
@@ -298,4 +298,3 @@ Potential improvements for future versions:
 - Multi-language support
 - Advanced analytics dashboard
 - Automated testing suite
-- Admin dashboard for product management
