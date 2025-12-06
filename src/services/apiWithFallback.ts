@@ -14,10 +14,8 @@ export const api = axios.create({
 });
 
 // Flag to determine if we should use mock API
-// Initialize based on environment variable or default to true for development
-let useMockApi =
-  process.env.REACT_APP_USE_MOCK_API === "true" ||
-  process.env.NODE_ENV === "development";
+// Always use mock API for now until backend is deployed
+let useMockApi = true;
 
 // Import mock API
 import { mockApi } from "./mockApi";

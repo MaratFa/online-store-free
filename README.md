@@ -2,6 +2,10 @@
 
 A modern, responsive e-commerce platform built with React, TypeScript, and Redux Toolkit. This application showcases a clean design with intuitive user interface and comprehensive shopping functionality, featuring a robust API fallback mechanism for seamless operation even when the backend is unavailable.
 
+## 🚀 Live Demo
+
+View the live application at: [https://your-app-url.vercel.app](https://your-app-url.vercel.app)
+
 ## ✨ Features
 
 - 🛍️ **Product Catalog**: Browse products with filtering, sorting, and search functionality
@@ -113,6 +117,34 @@ npm run serve
 ```
 
 This will start the production server on port 3000 (or the port specified in the PORT environment variable).
+
+## 🌐 Deployment
+
+### Deploying to Vercel
+
+The application is configured to be easily deployed to Vercel:
+
+1. **Automatic Deployment**:
+   - Connect your GitHub repository to Vercel
+   - Push changes to trigger automatic deployments
+
+2. **Manual Deployment**:
+   ```bash
+   # Install Vercel CLI
+   npm i -g vercel
+   
+   # Login and deploy
+   vercel login
+   vercel --prod
+   ```
+
+3. **Environment Variables**:
+   - Set `REACT_APP_API_URL` in Vercel dashboard if connecting to a real API
+   - Currently configured to use mock data in production
+
+### Important Note
+
+The application currently uses mock data for all environments to ensure smooth operation without a backend API. This prevents connection errors when deployed to platforms like Vercel. If you want to connect to a real backend API, update the `apiWithFallback.ts` file and set the `REACT_APP_API_URL` environment variable.
 
 ## 📖 Usage
 
@@ -298,3 +330,9 @@ Potential improvements for future versions:
 - Multi-language support
 - Advanced analytics dashboard
 - Automated testing suite
+
+## 🐛 Recent Fixes
+
+- Fixed API connection issues by implementing mock data fallback for production
+- Resolved circular import issues in routes configuration
+- Improved deployment compatibility with platforms like Vercel
