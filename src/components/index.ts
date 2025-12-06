@@ -7,5 +7,4 @@ export * from './ui';
 // Product components
 export * from './product';
 
-// Common components
-export * from './common';
+

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Input } from '../components/ui/Input';
-import { Button } from '../components/ui/Button';
+import { Button } from '../components/shared';
 import './Account.css';
 
 export const Account: React.FC = () => {
